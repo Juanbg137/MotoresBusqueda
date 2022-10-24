@@ -25,7 +25,7 @@ public class ProyectoMB {
 
         final SolrInputDocument doc = new SolrInputDocument();
         String indice = null, autor = null, titulo = null, texto = null;
-
+        
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
 
@@ -35,13 +35,14 @@ public class ProyectoMB {
                 indice = partes[1];
             }
 
+            if (line.startsWith(".T")) {
+                titulo = scan.nextLine();
+            }
+            
             if (line.startsWith(".A")) {
                 autor = scan.nextLine();
             }
 
-            if (line.startsWith(".T")) {
-                titulo = scan.nextLine();
-            }
 
             if (line.startsWith(".W")) {
                 texto = scan.nextLine();
@@ -72,4 +73,5 @@ public class ProyectoMB {
         client.add(doc);
         client.commit();
     }
+    
 }
